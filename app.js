@@ -1,10 +1,10 @@
 const inquirer = require('inquirer');
-// const fs = require('fs');
-// const generatePage = require('./src/page-template.js');
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
 
 // const pageHTML = generatePage(name, github);
 
-// fs.writeFile('./index.html', generatePage(name, github), err => {
+// fs.writeFile('./index.html', generatePage(name, github), (err) => {
 //   if (err) throw err;
 
 //   console.log('Portfolio complete! Check out index.html to see the output!');
@@ -117,7 +117,7 @@ const promptProject = portfolioData => {
         if (confirmAbout) {
           return true;
         } else {
-          return false;
+          return false;``
         }
       }
     },
@@ -147,5 +147,14 @@ const promptProject = portfolioData => {
 promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    console.log(portfolioData);
+  const pageHTML = generatePage(portfolioData);
+
+  fs.writeFile('./dist/index.html', pageHTML, (err) => {
+    console.log('file was written')
   });
+});
+
+// const pageHTML = generatePage(mockData);
+// // this will create three variables based on data in templateData
+// const { projects, about, ...header } = templateData;
+// console.log("projects", "about", "header");
